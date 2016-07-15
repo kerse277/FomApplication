@@ -10,10 +10,14 @@ import android.view.MenuItem;
 
 import com.fom.msesoft.fomapplication.R;
 import com.fom.msesoft.fomapplication.adapter.PagerAdapter;
+import com.fom.msesoft.fomapplication.model.Person;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ViewById;
+
+import lombok.Getter;
+import lombok.Setter;
 
 @EActivity(R.layout.activity_main)
 public class MainActivity extends AppCompatActivity {
@@ -24,12 +28,18 @@ public class MainActivity extends AppCompatActivity {
     @ViewById(R.id.tab_layout)
     TabLayout tabLayout;
 
+    @Getter
+    @Setter
+    Person person;
+
     @AfterViews
     void afterViews(){
 
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 22"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2222"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2223"));
+        person = (Person) getIntent().getSerializableExtra("person");
+
+        tabLayout.addTab(tabLayout.newTab().setText("Friend List"));
+        tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
+        tabLayout.addTab(tabLayout.newTab().setText("Feed"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final PagerAdapter adapter = new PagerAdapter

@@ -15,7 +15,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 /**
  * Created by oguz on 30.06.2016.
  */
-@Rest(rootUrl = "http://192.168.2.130:8081/person",converters = { MappingJackson2HttpMessageConverter.class })
+@Rest(rootUrl = "http://192.168.2.120:8081/person",converters = { MappingJackson2HttpMessageConverter.class })
 public interface PersonRepository {
 
     @Get("/findByFirstName?name=A1")
@@ -33,6 +33,6 @@ public interface PersonRepository {
     @Post("/singUp")
     Person insert(@Body Person person);
 
-    @Get("/findByPhoto?uniqueId=55a2678e-5c30-4928-90a0-94151307bc11")
-    Person findByPhoto();
+    @Get("/findByPhoto?uniqueId={uniqueId}")
+    Person findByPhoto(@Path String uniqueId);
 }

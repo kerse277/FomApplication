@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 
 import com.fom.msesoft.fomapplication.R;
 import com.fom.msesoft.fomapplication.activity.MainActivity;
+import com.fom.msesoft.fomapplication.activity.MainActivity_;
 import com.fom.msesoft.fomapplication.adapter.RecyclerViewAdapter;
 import com.fom.msesoft.fomapplication.model.Person;
 import com.fom.msesoft.fomapplication.repository.PersonRepository;
@@ -47,27 +48,17 @@ public class FriendListFragment extends Fragment {
 
         Person[] persons = personRepository.findByFirstDegreeFriend(((MainActivity)getActivity()).getPerson().getUniqueId());
 
-        //itemsData.add(new ItemData(R.drawable.icon_instagram,R.drawable.icon_instagram,R.drawable.icon_instagram));
-
         for(int i = 0 ;i<persons.length;i++){
             itemsData.add(persons[i].getPhoto());
         }
-     /*   if((persons.length%3)==1)
-            itemsData.add(new ItemData(persons[persons.length-2].getPhoto(),"",""));
 
-        if((persons.length%3)==2)
-            itemsData.add(new ItemData(persons[persons.length-2].getPhoto(),persons[persons.length-1].getPhoto(),""));
-*/
         postExecute(itemsData);
 
     }
 
     @UiThread
     void preExecute(){
-        progressDialog = new ProgressDialog(getActivity());
-        progressDialog.setMessage("Lütfen Bekleyiniz...");
-        progressDialog.setIndeterminate(false);
-        progressDialog.show();
+
 
     }
 
@@ -85,7 +76,7 @@ public class FriendListFragment extends Fragment {
         recyclerView.setAdapter(mAdapter);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        progressDialog.hide();
+
 
     }
 

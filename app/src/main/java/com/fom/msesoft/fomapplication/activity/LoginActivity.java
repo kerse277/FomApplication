@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
     void chechSign (Person person) {
        if(person!=null) {
            Intent intent = new Intent(this, MainActivity_.class);
-           intent.putExtra("prs",person);
+           intent.putExtra("person",person);
            startActivity(intent);
            this.finish();
        }

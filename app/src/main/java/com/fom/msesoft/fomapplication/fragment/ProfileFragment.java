@@ -4,7 +4,8 @@ import android.support.v4.app.Fragment;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.fom.msesoft.fomapplication.CircleTransform;
+import com.fom.msesoft.fomapplication.activity.MainActivity;
+import com.fom.msesoft.fomapplication.adapter.CircleTransform;
 import com.fom.msesoft.fomapplication.R;
 import com.fom.msesoft.fomapplication.model.Person;
 import com.fom.msesoft.fomapplication.repository.PersonRepository;
@@ -19,6 +20,7 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.Arrays;
 import java.util.List;
+
 
 @EFragment(R.layout.profile_fragment)
 public class ProfileFragment extends Fragment {
@@ -45,13 +47,13 @@ public class ProfileFragment extends Fragment {
 
     @Background
     void profileConnection () {
-        Person person = personRepository.findByPhoto();
-        List<Person> firstDegreeFriend = Arrays.asList(personRepository.findByFirstDegreeFriend());
-        profileNumber(firstDegreeFriend,person);
+         Person person = personRepository.findByPhoto();
+          List<Person> firstDegreeFriend = Arrays.asList(personRepository.findByFirstDegreeFriend(((MainActivity)getActivity()).getPerson().getUniqueId()));
+          profileNumber(firstDegreeFriend,person);
     }
 
     @UiThread
-    void profileNumber(List<Person> firstDegreeFriend,Person person) {
+    void profileNumber(List<Person> firstDegreeFriend, Person person) {
         friendNumber.setText(firstDegreeFriend.size() + "");
         Picasso.with(getActivity())
                 .load(person.getPhoto().toString())
