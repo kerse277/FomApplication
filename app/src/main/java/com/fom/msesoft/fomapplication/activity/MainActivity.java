@@ -3,6 +3,7 @@ package com.fom.msesoft.fomapplication.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -13,10 +14,12 @@ import com.fom.msesoft.fomapplication.adapter.PagerAdapter;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Fullscreen;
 import org.androidannotations.annotations.ViewById;
 
 @EActivity(R.layout.activity_main)
-public class MainActivity extends AppCompatActivity {
+@Fullscreen
+public class MainActivity extends ActionBarActivity {
 
     @ViewById(R.id.pager)
     ViewPager viewPager;
@@ -27,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @AfterViews
     void afterViews(){
 
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 22"));
+        tabLayout.addTab(tabLayout.newTab().setText("PROFİL"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2222"));
         tabLayout.addTab(tabLayout.newTab().setText("Tab 2223"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
