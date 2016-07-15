@@ -33,6 +33,4 @@ public interface PersonRepository {
     @Post("/singUp")
     Person insert(@Body Person person);
 
-    @Get("/findByPhoto?uniqueId={uniqueId}")
-    Person findByPhoto(@Path String uniqueId);
 }
