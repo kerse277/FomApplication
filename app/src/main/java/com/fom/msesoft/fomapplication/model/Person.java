@@ -1,5 +1,7 @@
 package com.fom.msesoft.fomapplication.model;
 
+import java.io.Serializable;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -10,7 +12,9 @@ import lombok.experimental.Accessors;
  */
 
 @Accessors(chain = true)
-public class Person {
+public class Person implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @Getter
     private Long id;

@@ -24,8 +24,8 @@ public interface PersonRepository {
     @Get("/singIn?email={email}&password={password}")
     Person signIn (@Path String email, @Path String password);
 
-    @Get("/findByFirstDegreeFriend?uniqueId=55a2678e-5c30-4928-90a0-94151307bc11")
-    Person[] findByFirstDegreeFriend();
+    @Get("/findByFirstDegreeFriend?uniqueId={uniqueId}")
+    Person[] findByFirstDegreeFriend(@Path String uniqueId);
 
     @Get("/workNotFriend?name=A1")
     Person[] workNotFriend();

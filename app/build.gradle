@@ -98,7 +98,7 @@ dependencies {
     // https://mvnrepository.com/artifact/org.springframework/spring-beans
     compile group: 'org.springframework', name: 'spring-beans', version: '4.3.0.RELEASE'
 
-
+    compile 'com.android.support:cardview-v7:23.3.+'
 
     //picasso
     compile 'com.squareup.picasso:picasso:2.4.0'

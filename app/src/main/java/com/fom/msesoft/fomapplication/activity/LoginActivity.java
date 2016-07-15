@@ -1,6 +1,7 @@
 package com.fom.msesoft.fomapplication.activity;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.UiThread;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBar;
@@ -24,6 +25,8 @@ import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Fullscreen;
 import org.androidannotations.annotations.ViewById;
 import org.androidannotations.rest.spring.annotations.RestService;
+
+import java.io.Serializable;
 
 
 @EActivity(R.layout.activity_login)
@@ -58,12 +61,16 @@ public class LoginActivity extends AppCompatActivity {
     @Background
     public void sign(String email, String password) {
         person = personRepository.signIn(email,password);
-        chechSign();
+        chechSign(person);
     }
     @UiThread
-    void chechSign () {
-        Intent intent = new Intent(this,MainActivity.class);
-        startActivity(intent);
+    void chechSign (Person person) {
+       if(person!=null) {
+           Intent intent = new Intent(this, MainActivity_.class);
+           intent.putExtra("prs",person);
+           startActivity(intent);
+           this.finish();
+       }
     }
 
 

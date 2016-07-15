@@ -5,9 +5,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.fom.msesoft.fomapplication.fragment.FirstFragment;
+import com.fom.msesoft.fomapplication.fragment.FriendListFragment;
+import com.fom.msesoft.fomapplication.fragment.FriendListFragment_;
 import com.fom.msesoft.fomapplication.fragment.ThreeFragment;
+import com.fom.msesoft.fomapplication.fragment.ThreeFragment_;
 import com.fom.msesoft.fomapplication.fragment.TwoFragment;
+import com.fom.msesoft.fomapplication.fragment.TwoFragment_;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
     int mNumOfTabs;
@@ -22,13 +25,13 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                FirstFragment tab1 = new FirstFragment();
+                FriendListFragment tab1 = new FriendListFragment_();
                 return tab1;
             case 1:
-                TwoFragment tab2 = new TwoFragment();
+                TwoFragment tab2 = new TwoFragment_();
                 return tab2;
             case 2:
-                ThreeFragment tab3 = new ThreeFragment();
+                ThreeFragment tab3 = new ThreeFragment_();
                 return tab3;
             default:
                 return null;
