@@ -94,7 +94,7 @@ public class ProfileFragment extends Fragment {
         friendNumber.setText(firstDegreeFriend.size() + "");
         Picasso.with(getActivity())
                 .load(person.getPhoto().toString())
-                .resize(150,150)
+                .resize(250,250)
                 .transform(new CircleTransform())
                 .into(profilePicture);
         profileName.setText(person.getFirstName()+" "+person.getLastName());

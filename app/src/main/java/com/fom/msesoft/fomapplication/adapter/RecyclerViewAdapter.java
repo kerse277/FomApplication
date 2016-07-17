@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fom.msesoft.fomapplication.R;
+import com.fom.msesoft.fomapplication.model.Person;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -15,10 +16,10 @@ import java.util.List;
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolders> {
 
 
-    private List<String> itemList;
+    private List<Person> itemList;
     private Context context;
 
-    public RecyclerViewAdapter(Context context, List<String> itemList) {
+    public RecyclerViewAdapter(Context context, List<Person> itemList) {
         this.itemList = itemList;
         this.context = context;
     }
@@ -33,9 +34,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerViewHolders holder, int position) {
+        holder.setPerson(itemList.get(position));
         Picasso.with(context)
-                .load(itemList.get(position))
-                .into(holder.countryPhoto);
+                .load(itemList.get(position).getPhoto())
+                .into(holder.personPhoto);
+
 
     }
 
