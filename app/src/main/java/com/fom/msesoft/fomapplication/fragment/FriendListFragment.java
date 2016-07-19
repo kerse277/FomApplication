@@ -1,20 +1,27 @@
 package com.fom.msesoft.fomapplication.fragment;
 
 
+import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
+import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.fom.msesoft.fomapplication.R;
 import com.fom.msesoft.fomapplication.activity.MainActivity;
 import com.fom.msesoft.fomapplication.activity.MainActivity_;
 import com.fom.msesoft.fomapplication.adapter.CircleTransform;
+import com.fom.msesoft.fomapplication.adapter.OnLoadMoreListener;
 import com.fom.msesoft.fomapplication.adapter.RecyclerViewAdapter;
 import com.fom.msesoft.fomapplication.model.Person;
 import com.fom.msesoft.fomapplication.repository.PersonRepository;
@@ -30,21 +37,30 @@ import org.androidannotations.rest.spring.annotations.RestService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 @EFragment(R.layout.friend_fragment)
 public class FriendListFragment extends Fragment {
+
+    RecyclerViewAdapter mAdapter;
+
+    @ViewById(R.id.progress_bar)
+    ProgressBar progressBar;
+
     @RestService
     PersonRepository personRepository;
 
     @ViewById(R.id.recyclerView)
     RecyclerView recyclerView;
 
+    @TargetApi(Build.VERSION_CODES.M)
     @AfterViews
-    void excute(){
+    void execute(){
         listAll();
-    }
+        progressBar.setVisibility(View.VISIBLE);
 
-    ProgressDialog progressDialog;
+
+    }
 
     private GridLayoutManager lLayout;
 
@@ -66,12 +82,13 @@ public class FriendListFragment extends Fragment {
 
     @UiThread
     void preExecute(){
-
-
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     @UiThread
-    void postExecute(List<Person> itemsData){
+    void postExecute(final List<Person> itemsData){
+
+        progressBar.setVisibility(View.GONE);
 
         lLayout = new GridLayoutManager(getActivity(),3);
 
@@ -79,7 +96,19 @@ public class FriendListFragment extends Fragment {
 
         recyclerView.setLayoutManager(lLayout);
 
-        RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(getActivity(),itemsData);
+        mAdapter = new RecyclerViewAdapter(getActivity(),itemsData,recyclerView);
+
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                Log.e("haint", "Load More");
+                itemsData.add(null);
+                mAdapter.notifyItemInserted(itemsData.size() - 1);
+
+                //Load more data for reyclerview
+                listAll();
+            }
+        });
 
         recyclerView.setAdapter(mAdapter);
 

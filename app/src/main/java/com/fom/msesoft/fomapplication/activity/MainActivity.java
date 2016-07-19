@@ -1,6 +1,7 @@
 package com.fom.msesoft.fomapplication.activity;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import com.fom.msesoft.fomapplication.model.Person;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.ItemSelect;
 import org.androidannotations.annotations.ViewById;
 
 import lombok.Getter;
@@ -32,14 +34,17 @@ public class MainActivity extends AppCompatActivity {
     @Setter
     Person person;
 
+
+
+
     @AfterViews
     void afterViews(){
 
         person = (Person) getIntent().getSerializableExtra("person");
 
-        tabLayout.addTab(tabLayout.newTab().setText("Friend List"));
-        tabLayout.addTab(tabLayout.newTab().setText("My Profile"));
-        tabLayout.addTab(tabLayout.newTab().setText("Feed"));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.find2));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.profile));
+        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.feed));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final PagerAdapter adapter = new PagerAdapter
@@ -50,10 +55,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewPager.setCurrentItem(tab.getPosition());
+                if(tab.getPosition()==0){
+                tab.setIcon(R.drawable.find2);
+                }else if(tab.getPosition()==1){
+                    tab.setIcon(R.drawable.profile2);
+                }else if(tab.getPosition()==2){
+                    tab.setIcon(R.drawable.feed2);
+                }
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
+                if(tab.getPosition()==0){
+                    tab.setIcon(R.drawable.find);
+                }else if(tab.getPosition()==1){
+                    tab.setIcon(R.drawable.profile);
+                }else if(tab.getPosition()==2){
+                    tab.setIcon(R.drawable.feed);
+                }
 
             }
 

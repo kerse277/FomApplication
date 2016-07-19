@@ -3,6 +3,7 @@ import android.app.Dialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +19,8 @@ public class RecyclerViewHolders extends RecyclerView.ViewHolder {
 
     @Setter
     private Person person;
+
+
 
     public ImageView personPhoto;
 
